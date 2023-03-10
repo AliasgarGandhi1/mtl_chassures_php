@@ -1,0 +1,52 @@
+.tab-container{
+    position: relative;
+    width: 1500px;
+    height: 1500px;
+    border: 0px;
+}
+.tab-content{
+    position: absolute;
+    left: 150px;
+    width: 1300px;
+    height: auto;
+    margin-top: 20px;
+    border: 1px solid black;
+    border-top: 3px solid black;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.6);
+}
+
+
+/* content */
+.address img{
+    margin:auto;
+    display: block;
+}
+.address-map{
+    display: block;
+    margin: 10px 350px;
+    box-shadow: rgba(0,0,0,0.3);
+}
+.parent{
+    display: flex;
+    margin: bottom 10px;
+}
+.child{
+    flex:1;
+}
+.child img{
+    margin:0px 0px 0px 550px;
+}
+.child h3{
+    margin:0px;
+    padding:0px;
+    padding-top: 10px;
+}
+#btnsubmit:disabled{
+    background-color: gray;
+}
+.child h1{
+    text-align: left;
+}
+.content-item{
+    margin:10px;
+}
