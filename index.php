@@ -39,23 +39,23 @@
         <?php
             # inlude content here
             if(!(isset($_GET['page']))){
-                include_once('./views/home.php');
+                include_once('./view/home.php');
             }
             else 
             {
                 $page = $_GET['page'];
                 switch ($page) {
                     case 'home':
-                        include_once('./views/home.php');
+                        include_once('./view/home.php');
                         break;
                     case 'about':
-                        include_once('./views/about.php');
+                        include_once('./view/about.php');
                         break;
                     case 'contact':
-                        include_once('./views/contact.php');
+                        include_once('./view/contact.php');
                         break;
                     case 'products':
-                        include_once('./views/products.php');
+                        include_once('./view/products.php');
                         break;
                     default:
                         echo "<h4 style='text-align:center; color:red'>404: Oops page not found...</h4>";
