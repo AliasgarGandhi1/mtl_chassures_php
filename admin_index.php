@@ -1,3 +1,15 @@
+<?php
+    # Include product class
+    include 'models/Products.php';
+    $productObj = new Products();
+    # Delete record from table
+    if(isset($_GET['deleteId'])&& !empty($_GET['deleteId']))
+    {
+        $deleteId = $_GET['deleteId'];
+        $productObj->deleteRecord($deleteId);
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,39 +44,38 @@
     <div>
         <?php
             # inlude Navbar
-            include_once('./partials/navbar.php');
+            include_once('./partials/admin_navbar.php');
         ?>
     </div>
     <main>
         <?php
             # inlude content here
             if(!(isset($_GET['page']))){
-                include_once('./views/home.php');
+                include_once('./views/admin.php');
             }
             else 
             {
                 $page = $_GET['page'];
+                if(isset($_GET['editId']))
+                {
+                    $editId = $_GET['editId'];
+                }
                 switch ($page) {
-                    case 'home':
+                    case 'add':
+                        include_once('./views/add.php');
+                        break;
+                    case 'edit':
+                        include_once('./views/edit.php');
+                        break;
+                    case 'user':
                         include_once('./views/home.php');
-                        break;
-                    case 'about':
-                        include_once('./views/about.php');
-                        break;
-                    case 'contact':
-                        include_once('./views/contact.php');
-                        break;
-                    case 'products':
-                        include_once('./views/products.php');
                         break;
                     default:
                         echo "<h4 style='text-align:center; color:red'>404: Oops page not found...</h4>";
                         break;
                 }
             }
-            
         ?>
-        
     </main>    
         <?php
             # inlude footer
