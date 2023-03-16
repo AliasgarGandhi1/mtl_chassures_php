@@ -28,8 +28,8 @@ class Products
     public function insertData($post)
     {
         $name = $_POST['name'];
-        $file = $_FILES['image'];
-        $image = $file['tmp_name'];
+        $fileName = $_FILES['image']['name'];        
+        $image = './Images/'.$fileName;
         $description = $_POST['description'];
         $price = $_POST['price'];
         $query = "INSERT INTO products(name, image, description, price) 
@@ -82,8 +82,8 @@ class Products
     public function updateRecord($post)
     {
         $name = $_POST['name'];
-        $file = $_FILES['image'];
-        $image = $file['tmp_name'];
+        $fileName = $_FILES['image']['name'];
+        $image = './Images/'.$fileName;
         $description = $_POST['description'];
         $price = $_POST['price'];
         $id = $_POST['id'];
