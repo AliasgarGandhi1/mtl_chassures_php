@@ -4,7 +4,18 @@
  # Insert record into customer table
  if(isset($_POST['submit']))
  {
+    // function debug_to_console($data) {
+    //     $output = $data;
+    //     if (is_array($output))
+    //         $output = implode(',', $output);
+    
+    //     echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+    // }
+    // debug_to_console($_POST);
+    
     $productObj1->insertData($_POST);
+    
+    
  }
 ?>
 
@@ -12,7 +23,7 @@
         <h3>Add Product in Object Oriented PHP</h3>
     </div><br>
     <div class="container">
-        <form action="<?php $_PHP_SELF ?>" method="POST">
+        <form action="<?php $_PHP_SELF ?>" enctype="multipart/form-data" method="POST">
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" class="form-control" name ="name" placeholder="Enter name" required="">

@@ -27,7 +27,7 @@
         <h3>Update product info in Object Oriented PHP</h3>
 </div><br>
     <div class="container">
-        <form action="<?php $_PHP_SELF ?>" method="POST">
+        <form action="<?php $_PHP_SELF ?>" enctype="multipart/form-data" method="POST">
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" class="form-control" name ="name" placeholder="Enter name" value="<?php echo $product['name'] ?>" required="">
