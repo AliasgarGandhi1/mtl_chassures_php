@@ -62,9 +62,7 @@
                         break;
                 }
             }
-            
         ?>
-        
     </main>    
         <?php
             # inlude footer
