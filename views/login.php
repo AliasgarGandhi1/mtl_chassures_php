@@ -1,3 +1,15 @@
+<?php
+// Start the session
+session_start();
+if($_SERVER['REQUEST_METHOD'] === 'POST')
+{
+    $_SESSION['email'] = $_POST['email'];
+    $_SESSION['password'] = md5($_POST['password']);
+    header('Location: ../index.php?page=home');
+    exit;
+}
+?>
+
 <html>
 <head>
   <meta charset="utf-8">
@@ -48,7 +60,7 @@
           <div class="formbg">
             <div class="formbg-inner padding-horizontal--48">
               <span class="padding-bottom--15">Sign in to your account</span>
-              <form id="stripe-login">
+              <form id="stripe-login" method="POST">
                 <div class="field padding-bottom--24">
                   <label for="email">Email</label>
                   <input type="email" name="email">
