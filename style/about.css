@@ -15,8 +15,12 @@
     right: 27%;
 }
 
+.flex{
+  display: flex;
+}
+
 .about-us-container{
-    display: flex;
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 60px;

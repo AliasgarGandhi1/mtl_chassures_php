@@ -67,12 +67,20 @@
         </section>
         <section class="flex">
           <section>
-            <img class="team-img" src="images//aliasgar.png" alt="" srcset="">
+            <img class="team-img" src="Images/aliasgar.png" alt="" srcset="">
             <section class="team-img-content">
               <h2>Aliasgar Gandhi</h2>
               <h4>CEO</h4>
             </section>
           </section>
+          <section>
+            <img class="team-img" src="Images/chintan.jpeg" alt="" srcset="">
+            <section class="team-img-content">
+              <h2>Chintan Patel</h2>
+              <h4>CFO</h4>
+            </section>
+          </section>
+        </section>
         </section>
       </section>
     </section>

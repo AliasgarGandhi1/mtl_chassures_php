@@ -13,7 +13,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">    
-    <title>Welcome to my Page</title>
+    <link rel="stylesheet" href="style/product_details.css">
+    <link rel="shortcut icon" href="./Images/icons/favicon1.png" type="image/x-icon">
+    <title>MTL CHASSURES</title>
     <style>
         footer {
                 text-align: center;
@@ -48,15 +50,27 @@
                     case 'home':
                         include_once('./views/home.php');
                         break;
+
                     case 'about':
                         include_once('./views/about.php');
                         break;
+
                     case 'contact':
                         include_once('./views/contact.php');
                         break;
+                        
                     case 'products':
                         include_once('./views/products.php');
                         break;
+
+                    case 'product_details':
+                        include_once('./views/product_details.php');
+                        break;
+
+                    case 'cart':
+                        include_once('./views/cart.php');
+                        break;
+
                     default:
                         echo "<h4 style='text-align:center; color:red'>404: Oops page not found...</h4>";
                         break;

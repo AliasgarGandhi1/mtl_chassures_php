@@ -6,7 +6,7 @@ class Products
     private $servername = 'localhost';
     private $username = 'root';
     private $password = '';
-    private $database = 'transweb';
+    private $database = 'mtl_chassures';
     public $con;
 
     # Member functions
@@ -65,7 +65,7 @@ class Products
     # fetch single customer record for editing, etc..
     public function displayRecordById($id)
     {
-        $query = "SELECT * FROM products WHERE id = '$id'";
+        $query = "SELECT * FROM products WHERE productId = '$id'";
         $result = $this->con->query($query);
         if($result->num_rows > 0)
         {           
