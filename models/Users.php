@@ -4,9 +4,9 @@ class Users{
 
     // Database connection parameters
     private $host = "localhost";
-    private $username = "your_username";
-    private $password = "your_password";
-    private $database = "your_database";
+    private $username = "root";
+    private $password = "";
+    private $database = "mtl_chassures";
     public $conn;
 
     public function __construct()
