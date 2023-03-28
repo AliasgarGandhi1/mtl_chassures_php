@@ -23,7 +23,7 @@
             <form action="login.php" method="POST">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" name="name" id="name" class="form-control" placeholder="John Andrew">
+                    <input type="text" name="name" id="name" class="form-control" placeholder="John Wick">
                 </div>
                 
                 <div class="flex-container">
@@ -53,6 +53,11 @@
                         <label for="country">Country</label>
                         <input type="text" name="country" id="country" class="form-control" placeholder="Canada">
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="userName">User Name</label>
+                    <input type="text" name="userName" id="userName" class="form-control" placeholder="JhonWick2023">
                 </div>
 
                 <div class="form-group">

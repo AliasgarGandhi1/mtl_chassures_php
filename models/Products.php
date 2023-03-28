@@ -1,28 +1,18 @@
 <?php
 
+require_once 'db.php';
+
 class Products
 {
-    # Member variables
-    private $servername = 'localhost';
-    private $username = 'root';
-    private $password = '';
-    private $database = 'mtl_chassures';
-    public $con;
+    private $db;
 
     # Member functions
 
     # Database Connection in the constructor
     public function __construct()
     {
-        $this->con = mysqli_connect($this->servername, $this->username, $this->password,$this->database);
-        if(mysqli_connect_error())
-        {
-            trigger_error("failed to connect to MySQL: ". mysqli_connect_error());
-        }
-        else
-        {
-            return $this->con;
-        }
+        $this->db = new DB();
+        session_start();
     }
     # Insert product data into product table
     public function insertData($post)
@@ -32,10 +22,12 @@ class Products
         $image = './Images/'.$fileName;
         $description = $_POST['description'];
         $price = $_POST['price'];
-        $query = "INSERT INTO products(name, image, description, price) 
-                            VALUES('$name', '$image', '$description', '$price')";
-        $sql = $this->con->query($query);
-        if($sql==true){
+        $sql = "INSERT INTO products(name, image, description, price) 
+                            VALUES(?, ?, ?, ?)";
+        $stmt = $this->db->conn->prepare($sql);
+        $stmt->bind_param("sss", $name, $image, $description, $price);
+
+        if($stmt->execute()){
             header("Location:admin_index.php?msg1=insert");
         }
         else {
@@ -46,35 +38,37 @@ class Products
     # fetch customer records for listing
     public function displayData()
     {
-        $query = "SELECT * FROM products";
-        $result = $this->con->query($query);
-        if($result->num_rows > 0)
-        {
-            $data = array();
-            while($row = $result->fetch_assoc()){
-                $data[] = $row;
-            }
-            return $data;
+        $sql = "SELECT * FROM products";
+        $stmt = $this->db->conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            return $row;
         }
         else 
         {
-            echo "No found records";
+            echo "No records found";
         }
     }
 
     # fetch single customer record for editing, etc..
     public function displayRecordById($id)
     {
-        $query = "SELECT * FROM products WHERE productId = '$id'";
-        $result = $this->con->query($query);
-        if($result->num_rows > 0)
-        {           
-            $row = $result->fetch_assoc(); 
+        $sql = "SELECT * FROM products WHERE productId = ?";
+        $stmt = $this->db->conn->prepare($sql);
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
             return $row;
         }
         else 
         {
-            echo "Record not found";
+            echo "No records found";
         }
     }
 
@@ -89,27 +83,32 @@ class Products
         $id = $_POST['id'];
         if(!empty($id) &&!empty($post))
         {
-            $query = "UPDATE products SET name = '$name', image = '$image', description= '$description', price = '$price'
-                                            WHERE id = '$id'";
-            $sql = $this->con->query($query);
+            $sql = "UPDATE products SET name = '?', image = '?', description= '?', price = '?'
+                                            WHERE id = '?'";
+            $stmt = $this->db->conn->prepare($sql);
+            $stmt->bind_param("ssss", $name, $image, $description, $price, $id);
+            $stmt->execute();
+            $stmt->close();
             if($sql==true){
-                header("Location:admin_index.php?msg2=update");;
+                header("Location:admin_index.php?msg2=update");
             }
             else 
             {
                 echo "Failed to update";    
             }
-
         }
-
     }
 
     # Delete a specific customer
     public function deleteRecord($id)
     {
-        $query = "DELETE FROM products WHERE id = '$id'";
-        $sql = $this->con->query($query);
-        if ($sql==true)
+        $sql = "DELETE FROM products WHERE id = ?";
+        $stmt = $this->db->conn->prepare($sql);
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0)
         {
             header("Location:admin_index.php?msg3=delete");
         }

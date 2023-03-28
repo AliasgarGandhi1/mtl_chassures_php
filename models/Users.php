@@ -1,56 +1,94 @@
 <?php
+require_once 'db.php';
 
 class Users{
 
-    // Database connection parameters
-    private $host = "localhost";
-    private $username = "root";
-    private $password = "";
-    private $database = "mtl_chassures";
-    public $conn;
+    private $db;
 
     public function __construct()
     {
-        // Connect to the database
-        $conn = mysqli_connect($this->host, $this->username, $this->password, $this->database);
-        // Check if connection was successful
-        if (!$conn) {
-            die("Connection failed: " . mysqli_connect_error());
-        }
+        $this->db = new DB();
+        session_start();
     }
 
-    public function checkCredentials(){
-        // Get the input values from the user
-        $email = $_POST["email"];
-        $password = $_POST["password"];
+    public function getUserByEmail($email) {
+        $sql = "SELECT * FROM users WHERE email = ?";
+        $stmt = $this->db->conn->prepare($sql);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        // Prepare the SQL statement with placeholders
-        $sql = "SELECT * FROM users WHERE email = ? AND password = ?";
-        $stmt = mysqli_prepare($this->conn, $sql);
-
-        // Bind the parameters to the placeholders
-        mysqli_stmt_bind_param($stmt, "ss", $email, $password);
-
-        // Execute the statement
-        mysqli_stmt_execute($stmt);
-
-        // Get the result set
-        $result = mysqli_stmt_get_result($stmt);
-
-        // Check if the query was successful and if the user exists
-        if (mysqli_num_rows($result) > 0) {
-            // User exists, do something here
-            echo "User exists!";
-        } else {
-            // User does not exist, do something here
-            echo "User does not exist!";
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            return $row;
         }
 
-        // Close the statement and the database connection
-        mysqli_stmt_close($stmt);
-        mysqli_close($this->conn);
+        $stmt->close();
+        return null;
     }
 
+    public function checkUserName($userName) {
+        $sql = "SELECT userName FROM users WHERE userName = ?";
+        $stmt = $this->db->conn->prepare($sql);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            return $row;
+        }
+
+        $stmt->close();
+        return null;
+    }
+
+    public function getUserId() {
+        $sql = "SELECT userId FROM users ORDER BY userId DESC LIMIT 1";
+        $stmt = $this->db->conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            return $row;
+        }
+
+        $stmt->close();
+        return null;
+    }
+
+    public function addUser($userName, $email, $password, $customerName, $phoneNo, $address, $postalCode, $city, $state, $country) {
+        $sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+        $stmt = $this->db->conn->prepare($sql);
+        $stmt->bind_param("sss", $username, $password, $email);
+        $stmt->execute();
+
+        $userId = $this->getUserId();
+
+        $sql = "INSERT INTO customes (customerName, phoneNo, address, postalCode, city, state, country, email, userId) VALUES (?,?,?,?,?,?,?,?)";
+        $stmt = $this->db->conn->prepare($sql);
+        $stmt->bind_param("sss", $customerName, $phoneNo, $address, $postalCode, $city, $state, $country, $email, $userId);
+        $stmt->execute();
+        
+        $stmt->close();
+    }
+
+    public function setRememberToken($email, $cookieID) {
+        $sql = "UPDATE users SET cookieID = ? WHERE email = ?";
+        $stmt = $this->db->conn->prepare($sql);
+        $stmt->bind_param("ss", $cookieID, $email);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    public function clearRememberToken($email) {
+        $sql = "UPDATE users SET cookieID = NULL WHERE email = ?";
+        $stmt = $this->db->conn->prepare($sql);
+        $stmt->bind_param("ss", $cookieID, $email);
+        $stmt->execute();
+        $stmt->close();
+    }
 }
 
 ?>
