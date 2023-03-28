@@ -61,7 +61,7 @@ class Users{
     public function addUser($userName, $email, $password, $customerName, $phoneNo, $address, $postalCode, $city, $state, $country) {
         $sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
         $stmt = $this->db->conn->prepare($sql);
-        $stmt->bind_param("sss", $username, $password, $email);
+        $stmt->bind_param("sss", $userName, $password, $email);
         $stmt->execute();
 
         $userId = $this->getUserId();
