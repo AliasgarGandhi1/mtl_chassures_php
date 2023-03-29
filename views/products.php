@@ -1,14 +1,13 @@
 <?php
     # Include product class
-    include 'models/Products.php';
+    include './models/Products.php';
     $productObj = new Products();
 
-    session_start();
     if(!isset($_SESSION['cart']))
     {
         $_SESSION['cart'] = array();
     }
-   if($_SERVER['REQUEST_METHOD'] === 'GET')
+   if($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['submit']))
    {
         if(isset($_GET['productId']))
         {
@@ -37,11 +36,11 @@
                 <div class="card-body">
                     <div>
                     <form action="index.php?page=products&productId=<?php echo $product['productId']; ?>" method="get">
-                        <input type="hidden" name="productId" value="<?php echo $product['productId']; ?>">
-                    
+                        <input type="hidden" name="productId" value="// echo $product['productId']; ?>">
+                    <!-- <form action="" method="get"> -->
                     <h5 class="card-title"><?php echo $product['name']; ?></h5>
                     <p><?php echo $product['description']; ?></p>
-                    <p class="card-text"><?php echo $product['price']; ?></p>
+                    <p class="card-text">$ <?php echo $product['price']; ?></p>
                     </div>
                     </a>
                     <div>

@@ -1,3 +1,20 @@
+<?php
+  include '../models/Users.php';
+
+  $user = new Users();
+
+  if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
+    $hashedPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $_POST['password'] = "";
+    if ($user->addUser($_POST, $hashedPassword)) {
+      header('Location: login.php');
+    }
+  }
+  // else {
+  //   echo "<script>alert('Something went wrong.');</script>";
+  // }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,10 +37,15 @@
           </div>
           <div class="login-wrapper my-auto">
             <h1 class="login-title">Sign Up</h1>
-            <form action="login.php" method="POST">
+            <form action="sign_up.php" method="POST">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" name="name" id="name" class="form-control" placeholder="John Wick">
+                </div>
+
+                <div class="form-group address">
+                        <label for="phone">Phone Number</label>
+                        <input type="text" name="phoneNo" id="phoneNo" class="form-control" placeholder="+1 (999) 999-9999">
                 </div>
                 
                 <div class="flex-container">
@@ -34,7 +56,7 @@
 
                     <div class="form-group address">
                         <label for="postalcode">Postal Code</label>
-                        <input type="postal code" name="postalCode" id="postalCode" class="form-control" placeholder="H3G2G7">
+                        <input type="postal code" name="postalCode" id="postalCode" class="form-control" placeholder="H3G 2G7">
                     </div>
                 </div>
 
@@ -73,7 +95,7 @@
                     <label for="confirm_password">Confirm Password</label>
                     <input type="password" name="confirm-password" id="confirm-password" class="form-control" placeholder="Re-Enter your passsword">
                 </div>        
-                <input name="register" id="register" class="btn btn-block login-btn" type="Submit" value="Register">
+                <input name="register" id="register" class="btn btn-block login-btn" type="submit" value="Register">
             </form>
         </div>
         </div>

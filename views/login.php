@@ -1,11 +1,26 @@
 <?php
-// Start the session
-session_start();
-if($_SERVER['REQUEST_METHOD'] === 'POST')
+// includes user class.
+include '../models/Users.php';
+$user = new Users();
+
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login']))
 {
-    $_SESSION['email'] = $_POST['email'];
-    $_SESSION['password'] = md5($_POST['password']);
-    header('Location: ../index.php?page=home');
+    if(isset($_POST['remember'])){
+      if ($user->login($_POST['email'], $_POST['password'], true)) {
+        echo '<script>alert("User Logged in Successfully !!!");</script>';
+        header('Location: ../index.php');
+      }
+      else {
+        echo '<script>alert("Incorrect username or password !!!");</script>';
+      }
+    }
+    else{
+      if ($user->login($_POST['email'], $_POST['password'],false)) {
+        header('Location: ../index.php');
+      } else {
+        echo '<script>alert("Incorrect username or password !!!");</script>';
+      }
+    } 
     exit;
 }
 ?>
@@ -32,7 +47,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
           </div>
           <div class="login-wrapper my-auto">
             <h1 class="login-title">Log in</h1>
-            <form action="#!">
+            <form action="login.php" method="POST">
               <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email" class="form-control" placeholder="email@example.com">
@@ -41,7 +56,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password" class="form-control" placeholder="enter your passsword">
               </div>
-              <input name="login" id="login" class="btn btn-block login-btn" type="button" value="Login">
+              <div class="checkbox">
+									<label>
+										<input type="checkbox" name="remember"> Remember Me
+									</label>
+							</div>
+              <input name="login" id="login" class="btn btn-block login-btn" type="submit" value="Login">
             </form>
             <a href="#!" class="forgot-password-link">Forgot password?</a>
             <p class="login-wrapper-footer-text">Don't have an account? <a href="./sign_up.php" class="text-reset">Register here</a></p>

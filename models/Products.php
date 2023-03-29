@@ -12,14 +12,16 @@ class Products
     public function __construct()
     {
         $this->db = new DB();
-        session_start();
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
     }
     # Insert product data into product table
     public function insertData($post)
     {
         $name = $_POST['name'];
         $fileName = $_FILES['image']['name'];        
-        $image = './Images/'.$fileName;
+        $image = 'Images\\'.$fileName;
         $description = $_POST['description'];
         $price = $_POST['price'];
         $sql = "INSERT INTO products(name, image, description, price) 
@@ -42,10 +44,13 @@ class Products
         $stmt = $this->db->conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->get_result();
-
+        
         if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            return $row;
+            $data = array();
+            while($row = $result->fetch_assoc()){
+                $data[] = $row;
+            }
+            return $data;
         }
         else 
         {
@@ -77,7 +82,7 @@ class Products
     {
         $name = $_POST['name'];
         $fileName = $_FILES['image']['name'];
-        $image = './Images/'.$fileName;
+        $image = '\\Images\\'.$fileName;
         $description = $_POST['description'];
         $price = $_POST['price'];
         $id = $_POST['id'];
