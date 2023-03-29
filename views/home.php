@@ -11,15 +11,18 @@
 ?>
 <div class="text-right">
     <?php 
-        if(isset($_SESSION['user']))
-        { 
-            echo 'Welcome ' .$_SESSION['user']; 
-            echo '<form action="index.php" method="post">
-            <button class="btn-danger" type="submit">Logout</button>
+        if(isset($_SESSION['user'])) { 
+            echo '<form action="index.php?login=false" method="post">
+            <lable>Welcome '  .$_SESSION["user"] . '</lable>
+            <button class="btn-danger" name="logout" type="submit">Logout</button>
+            </form>';
+        }
+        else {
+            echo '<form action="index.php?login=true" method="post">
+            <button class="btn-success"><a class="btn-success" name="login" href="views/login.php">Log In</a></button>
             </form>';
         }
     ?>
-    
 </div>
 <div class="jumbotron jumbotron-fluid">
         <div class="container">

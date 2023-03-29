@@ -14,9 +14,6 @@
             <li class="nav-item">
             <a class="nav-link" href="./admin_index.php?page=edit">Delete</a>
             </li>
-            <li class="nav-item">
-            <a class="nav-link" href="./index.php?page=home">User</a>
-            </li>
         </ul>
         </div>
 </nav>

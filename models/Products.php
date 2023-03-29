@@ -27,7 +27,7 @@ class Products
         $sql = "INSERT INTO products(name, image, description, price) 
                             VALUES(?, ?, ?, ?)";
         $stmt = $this->db->conn->prepare($sql);
-        $stmt->bind_param("sss", $name, $image, $description, $price);
+        $stmt->bind_param("ssss", $name, $image, $description, $price);
 
         if($stmt->execute()){
             header("Location:admin_index.php?msg1=insert");

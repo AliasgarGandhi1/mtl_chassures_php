@@ -7,17 +7,31 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login']))
 {
     if(isset($_POST['remember'])){
       if ($user->login($_POST['email'], $_POST['password'], true)) {
-        echo '<script>alert("User Logged in Successfully !!!");</script>';
-        header('Location: ../index.php');
+        if ($_POST['email'] === "ali.mtl_chassures@gmail.com") {
+          echo '<script>alert("User Logged in Successfully !!!");</script>';
+          header('Location: ../admin_index.php');
+        }
+        else {
+          echo '<script>alert("User Logged in Successfully !!!");</script>';
+          header('Location: ../index.php');
+        }
       }
       else {
         echo '<script>alert("Incorrect username or password !!!");</script>';
       }
     }
     else{
-      if ($user->login($_POST['email'], $_POST['password'],false)) {
-        header('Location: ../index.php');
-      } else {
+      if ($user->login($_POST['email'], $_POST['password'], false)) {
+        if ($_POST['email'] === "ali.mtl_chassures@gmail.com") {
+          echo '<script>alert("User Logged in Successfully !!!");</script>';
+          header('Location: ../admin_index.php');
+        }
+        else {
+          echo '<script>alert("User Logged in Successfully !!!");</script>';
+          header('Location: ../index.php');
+        }
+      }
+      else {
         echo '<script>alert("Incorrect username or password !!!");</script>';
       }
     } 

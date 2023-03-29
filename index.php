@@ -34,18 +34,18 @@
     <div>
         <?php
             # inlude Navbar
-            include('./partials/navbar.php');
+            include_once('./partials/navbar.php');
         ?>
     </div>
     <main>
         <?php
             # inlude content here
-            if(!(isset($_POST['page']))){
+            if(!(isset($_GET['page']))){
                 include_once('./views/home.php');
             }
             else 
             {
-                $page = $_POST['page'];
+                $page = $_GET['page'];
                 switch ($page) {
                     case 'home':
                         include_once('./views/home.php');
@@ -80,7 +80,7 @@
     </main>    
         <?php
             # inlude footer
-            include('./partials/footer.php');
+            include_once('./partials/footer.php');
         ?>     
 </body>
 </html>
