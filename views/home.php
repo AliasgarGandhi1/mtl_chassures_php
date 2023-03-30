@@ -8,6 +8,22 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user->logout();
     }
+
+    if(!isset($_SESSION['cart']))
+    {
+        $_SESSION['cart'] = array();
+    }
+   if($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['cart']))
+   {
+        if(isset($_GET['productId']))
+        {
+            $product = $_GET['productId'];
+            array_push($_SESSION['cart'], $product); 
+        }
+        else{
+            echo "Product Id not found.";
+        }
+   }
 ?>
 <div class="text-right">
     <?php 
@@ -48,14 +64,17 @@
                 <div class="card h-100 shadow">
                 <img src="<?php echo $product['image']; ?>" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <div>
+                <div>
+                    <form action="index.php" method="get">
+                        <input type="hidden" name="productId" value="<?php echo $product['productId']; ?>">
                     <h5 class="card-title"><?php echo $product['name']; ?></h5>
                     <p><?php echo $product['description']; ?></p>
                     <p class="card-text">$ <?php echo $product['price']; ?></p>
                     </div>
                     </a>
                     <div>
-                    <button type="submit" class="btn btn-danger">Add to Cart</button>
+                        <button type="submit" name="cart" class="btn btn-danger">Add to Cart</button>
+                    </form>
                     <a href="placeOrder.php?id=<?php echo $product['productId']; ?>" class="btn btn-danger">Buy Now</a>
                     </div>
                 </div>

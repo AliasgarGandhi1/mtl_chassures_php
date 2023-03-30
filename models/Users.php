@@ -114,8 +114,8 @@ class Users{
     }
 
     public function logout() {
-        $this->clearLoggedInUser();
         $this->clearLoginCookie();
+        $this->clearLoggedInUser();
         session_destroy();
     }
 

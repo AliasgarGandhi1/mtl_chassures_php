@@ -73,7 +73,7 @@ class Products
         }
         else 
         {
-            echo "No records found";
+            
         }
     }
 

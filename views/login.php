@@ -22,6 +22,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login']))
     }
     else{
       if ($user->login($_POST['email'], $_POST['password'], false)) {
+        // Check  email id, whether its' admin's or not. 
         if ($_POST['email'] === "ali.mtl_chassures@gmail.com") {
           echo '<script>alert("User Logged in Successfully !!!");</script>';
           header('Location: ../admin_index.php');

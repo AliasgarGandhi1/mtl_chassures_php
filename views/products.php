@@ -37,7 +37,6 @@
                     <div>
                     <form action="index.php?page=products&productId=<?php echo $product['productId']; ?>" method="get">
                         <input type="hidden" name="productId" value="// echo $product['productId']; ?>">
-                    <!-- <form action="" method="get"> -->
                     <h5 class="card-title"><?php echo $product['name']; ?></h5>
                     <p><?php echo $product['description']; ?></p>
                     <p class="card-text">$ <?php echo $product['price']; ?></p>
