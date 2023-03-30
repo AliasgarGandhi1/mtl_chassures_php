@@ -22,32 +22,37 @@
     ?>
     <table class="table table-hover">
         <thead>
-            <th>Id</th>
+            <th>Sr. No.</th>
             <th>Name</th>
             <th>Image</th>
             <th>Description</th>
             <th>Price</th>
-            <th>Action</th>
+            <th></th>
         </thead>
         <tbody>
     <?php
-            foreach ($cart as $item) {
-            $items = $product->displayRecordById($item);
-            if (!empty($items)) {
+        $cnt = 0; 
+        foreach ($cart as $item) {
+        $items = $product->displayRecordById($item);
+        if (!empty($items)) {
+            $cnt++;
+            
     ?>
             <tr>
-                <td><?php echo $items['productId']; ?></td>
+                <td><?php echo $cnt; ?></td>
                 <td><?php echo $items['name']; ?></td>
                 <td><img src="<?php echo $items['image']; ?>" style="width: 150px;" class="card-img-top" alt="..."></td>
                 <td><?php echo $items['description']; ?></td>
                 <td>$<?php echo $items['price']; ?></td>
                 <td>
-                    <a href="placeOrder.php?id=<?php echo $items['productId']; ?>" class="btn btn-success">Buy Now</a>&nbsp&nbsp&nbsp
+                    &nbsp&nbsp&nbsp
                     <a href="index.php?page=cart&deleteId=<?php echo $items['productId'];?>" style="color:red;" ><i class="fa fa-trash" aria-hidden="true"></i></td></a>
             </tr>
     <?php }}?>
     </tbody>
     </table>
+    <div class="text-center container"><a href="placeOrder.php?id=<?php echo $items['productId']; ?>" class="btn col-md-6 btn-success">Place Order</a></div>
+    <div style="height: 100px;"></div>
     <?php 
         }
         else {
