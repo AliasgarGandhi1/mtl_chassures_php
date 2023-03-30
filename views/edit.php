@@ -24,7 +24,7 @@
 ?>
 
 <div class="card text-center" style="padding: 15px;">
-        <h3>Update product info in Object Oriented PHP</h3>
+        <h3>Change or Delete Shoes Details</h3>
 </div><br>
     <div class="container">
         <form action="<?php $_PHP_SELF ?>" enctype="multipart/form-data" method="POST">
@@ -47,7 +47,7 @@
             <div class="form-group">
                 <input type="hidden" class="form-control" style="width: 50px; position:fixed;" name ="id" value="<?php echo $product['id'] ?>">
                 <input type="submit" name="update" class="btn btn-primary" style="float:right; margin-top:5px; padding-right:15px;" value="Update">
-                <input type="submit" name="delete" class="btn btn-primary" style="float:right; margin-top:5px" value="Delete">
+                <input type="submit" name="delete" class="btn btn-primary" style="float:right; margin-top:5px; margin-right:15px;" value="Delete">
             </div>
         </form>
         <div style="height: 100px;"></div>

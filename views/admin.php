@@ -14,9 +14,25 @@
     ?>
 </div><br><br>
     <div>
-        <h2>View Records
-            <a href="admin_index.php?page=add" class="btn btn-primary" style="float:right;">Add New Record</a>
-        </h2>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">                
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+                    <form action="index.php?page=products" class="d-flex" method="GET">
+                        <input type=text name=page value="products" hidden=true>
+                        <select class="form-control me-2" name="sort" label="Sort by:">
+                                    <option class="dropdown-item" value="price_asc">Price: Low to High</option>
+                                    <option class="dropdown-item" value="price_desc">Price: High to Low</option>
+                                    <option class="dropdown-item" value="name_asc">Name: A to Z</option>
+                                    <option class="dropdown-item" value="name_desc">Name: Z to A</option>
+                                </select>
+                    <input class="form-control me-4" name="query" type="text" placeholder="Search"
+                        aria-label="Search">
+                    <button class="btn btn-outline-success" name="submit" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
     
     <table class="table table-hover">
         <thead>
