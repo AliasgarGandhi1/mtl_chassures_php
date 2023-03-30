@@ -4,7 +4,7 @@ class DB {
     private $host = 'localhost';
     private $user = 'root';
     private $password = '';
-    private $database = 'mtl_chassures';
+    private $database = 'transweb';
     public $conn = null;
 
     public function __construct() {

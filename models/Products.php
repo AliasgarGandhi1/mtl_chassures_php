@@ -58,6 +58,42 @@ class Products
         }
     }
 
+    public function searchRecords($get)
+    {
+        $query = $_GET['query'] ?? '';
+        $sort = $_GET['sort'] ?? 'price_asc';
+
+        $where = "WHERE name LIKE '%$query%'";
+       
+
+        $order_by = '';
+        if ($sort === 'price_asc') {
+            $order_by = 'ORDER BY price ASC';
+        } elseif ($sort === 'price_desc') {
+            $order_by = 'ORDER BY price DESC';
+        } elseif ($sort === 'name_asc') {
+            $order_by = 'ORDER BY name ASC';
+        } elseif ($sort === 'name_desc') {
+            $order_by = 'ORDER BY name DESC';
+        }
+
+        $query = "SELECT * FROM products $where $order_by";
+       
+        $result = $this->db->conn->query($query);
+
+        // Display search results
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+            return $data;
+        } else {
+            echo "Records not found.";
+        }
+
+        
+    }
+
     # fetch single customer record for editing, etc..
     public function displayRecordById($id)
     {
